@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.0;
 
 interface ERC721 {
@@ -9,7 +10,7 @@ interface ERC721 {
 
     function ownerOf(uint256 _tokenId) external view returns (address);
 
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable;
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) external payable;
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable;
 
@@ -34,48 +35,48 @@ contract TestEasy721Token is ERC721 {
     mapping(address => uint256) private _ownerTokenAmountMap;
     mapping(uint256 => address) private _tokenIdOwnerMap;
 
-    function balanceOf(address _owner) external view returns (uint256){
+    function balanceOf(address _owner) override external view returns (uint256){
         return _ownerTokenAmountMap[_owner];
     }
 
-    function ownerOf(uint256 _tokenId) external view returns (address){
+    function ownerOf(uint256 _tokenId) override external view returns (address){
         return _tokenIdOwnerMap[_tokenId];
     }
 
-    function mint(){
+    function mint() public{
         uint256 _tokenId = totalSupply + 1;
         _ownerTokenAmountMap[msg.sender] += 1;
         _tokenIdOwnerMap[_tokenId] = msg.sender;
         emit Transfer(address(0), msg.sender, _tokenId);
 
-        totalSupply += 1;
+        totalSupply+=1;
     }
 
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable {
-
-    }
-
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable {
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override external payable{
 
     }
 
-    function transferFrom(address _from, address _to, uint256 _tokenId) external payable {
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) override external payable {
 
     }
 
-    function approve(address _approved, uint256 _tokenId) external payable {
+    function transferFrom(address _from, address _to, uint256 _tokenId) override external payable {
 
     }
 
-    function setApprovalForAll(address _operator, bool _approved) external {
+    function approve(address _approved, uint256 _tokenId) override external payable {
 
     }
 
-    function getApproved(uint256 _tokenId) external view returns (address){
+    function setApprovalForAll(address _operator, bool _approved) override external {
 
     }
 
-    function isApprovedForAll(address _owner, address _operator) external view returns (bool){
+    function getApproved(uint256 _tokenId) override external view returns (address){
+
+    }
+
+    function isApprovedForAll(address _owner, address _operator) override external view returns (bool){
 
     }
 
