@@ -37,22 +37,22 @@ SupportsInterface
     /**
      * @dev A mapping from NFT ID to the address that owns it.
      */
-    mapping (uint256 => address) internal idToOwner;
+    mapping(uint256 => address) internal idToOwner;
 
     /**
      * @dev Mapping from NFT ID to approved address.
      */
-    mapping (uint256 => address) internal idToApproval;
+    mapping(uint256 => address) internal idToApproval;
 
     /**
     * @dev Mapping from owner address to count of his tokens.
     */
-    mapping (address => uint256) private ownerToNFTokenCount;
+    mapping(address => uint256) private ownerToNFTokenCount;
 
     /**
      * @dev Mapping from owner address to mapping of operator addresses.
      */
-    mapping (address => mapping (address => bool)) internal ownerToOperators;
+    mapping(address => mapping(address => bool)) internal ownerToOperators;
 
     /**
      * @dev Guarantees that the msg.sender is an owner or operator of the given NFT.
@@ -105,7 +105,8 @@ SupportsInterface
      */
     constructor()
     {
-        supportedInterfaces[0x80ac58cd] = true; // ERC721
+        supportedInterfaces[0x80ac58cd] = true;
+        // ERC721
     }
 
     /**
@@ -336,6 +337,16 @@ SupportsInterface
         _addNFToken(_to, _tokenId);
 
         emit Transfer(address(0), _to, _tokenId);
+
+        totalSupply += 1;
+    }
+
+    uint256 totalSupply = 0;
+
+    function mint() public {
+        uint256 _tokenId = totalSupply + 1;
+        _mint(msg.sender, _tokenId);
+
     }
 
     /**
