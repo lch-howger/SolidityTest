@@ -43,16 +43,20 @@ contract TestEasy721Token is ERC721 {
         return _tokenIdOwnerMap[_tokenId];
     }
 
-    function mint() public{
+    function mint() public {
         uint256 _tokenId = totalSupply + 1;
         _ownerTokenAmountMap[msg.sender] += 1;
         _tokenIdOwnerMap[_tokenId] = msg.sender;
         emit Transfer(address(0), msg.sender, _tokenId);
 
-        totalSupply+=1;
+        totalSupply += 1;
     }
 
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override external payable{
+    function transfer() public {
+
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override external payable {
 
     }
 
